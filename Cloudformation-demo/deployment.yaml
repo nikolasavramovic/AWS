@@ -6,48 +6,47 @@ Parameters:
     Description: Environment Name
     Type: String
 
-Resources:
-    
+Resources:   
     lambdaFunctionIamRole:
-        Type: AWS::IAM::Role
-        Properties:
+      Type: AWS::IAM::Role
+      Properties:
         AssumeRolePolicyDocument:
             Version: '2012-10-17'
             Statement:
                 - Effect: Allow
-                    Principal:
+                  Principal:
                     Service: lambda.amazonaws.com
-                    Action: sts:AssumeRole
-          Policies: 
-            - PolicyName: "youtube-demo-lambda-policy"
-              PolicyDocument:
-                Version: "2012-10-17"
-                Statement:
-                  - Effect: "Allow"
-                    Action:
-                       - "logs:CreateLogGroup"
-                       - "logs:CreateLogStream"
-                       - "logs:PutLogEvents" 
-                    Resource: "*"
+                  Action: sts:AssumeRole
+        Policies: 
+        - PolicyName: "youtube-demo-lambda-policy"
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: "Allow"
+                Action:
+                    - "logs:CreateLogGroup"
+                    - "logs:CreateLogStream"
+                    - "logs:PutLogEvents" 
+                Resource: "*"
 
 
     lambdaFunction:
         Type: AWS::Lambda::Function
         Properties:
-            Description: "CloudFormation Demo Lambda"
-            FunctionName: !Sub youtube-demo-cloudformation${Environment}
-            Handler: Cloudformation-demo::Cloudformation_demo.Function::FunctionHandler
-            MemorySize: 128
-            Role: !GetAtt lambdaFunctionIamRole.Arn
-            Runtime: dotnet8
-            Timeout: 30
-            Environment:
-                Variables:
-                    key1: value1
-            Code:
+          Description: "CloudFormation Demo Lambda"
+          FunctionName: !Sub youtube-demo-cloudformation${Environment}
+          Handler: Cloudformation-demo::Cloudformation_demo.Function::FunctionHandler
+          MemorySize: 128
+          Role: !GetAtt lambdaFunctionIamRole.Arn
+          Runtime: dotnet8
+          Timeout: 30
+          Environment:
+              Variables:
+                  key1: value1
+          Code:
               S3Bucket: learning-cloudformation-package
               S3Key: lambda.zip
-            Tags:
+          Tags:
               - Key: keyname
                 Value: value
 
