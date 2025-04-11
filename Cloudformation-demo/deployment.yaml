@@ -39,7 +39,7 @@ Resources:
             FunctionName: !Sub youtube-demo-cloudformation${Environment}
             Handler: Cloudformation-demo::Cloudformation_demo.Function::FunctionHandler
             MemorySize: 128
-            Role: !Sub lambdaFunctionIamRole.Arn
+            Role: !GetAtt lambdaFunctionIamRole.Arn
             Runtime: dotnet8
             Timeout: 30
             Environment:
