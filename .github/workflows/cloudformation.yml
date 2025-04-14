@@ -67,12 +67,18 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1
 
+    - name: Generate timestamp
+      id: vars
+      run: echo "timestamp=$(date +%s)" >> $GITHUB_OUTPUT    
+
     - name: Deploy to AWS CloudFormation
       uses: aws-actions/aws-cloudformation-github-deploy@v1
       with:
         name: youtube-demo-cloudformation
         template: artifact/deployment.yaml
-        parameter-overrides: "Environment=-Test"
+        parameter-overrides: |
+	 "Environment=-Test"
+	 BuildHash=${{ steps.vars.outputs.timestamp }}
 
   prod-depoly:
     runs-on: ubuntu-latest
