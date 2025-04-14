@@ -46,9 +46,7 @@ Resources:
                 Resource: !GetAtt sqsQueue.Arn
 
     lambdaFunctionEventSourceMapping:
-      Type: AWS::Lambda::EventSourceMapping
-      Metadata:
-        BuildHash: !Sub ${AWS::StackName}-${AWS::Timestamp}
+      Type: AWS::Lambda::EventSourceMapping      
       Properties:
         BatchSize: 10
         Enabled: true
@@ -58,6 +56,8 @@ Resources:
 
     lambdaFunction:
         Type: AWS::Lambda::Function
+        Metadata:
+          BuildHash: !Sub ${AWS::StackName}-${AWS::Timestamp}
         Properties:
           Description: "CloudFormation Demo Lambda"
           FunctionName: !Sub youtube-demo-cloudformation${Environment}
