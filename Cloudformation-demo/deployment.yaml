@@ -5,8 +5,6 @@ Parameters:
   Environment:
     Description: Environment Name
     Type: String
-  BuildHash:
-    Type: String
 
 Resources:   
     sqsQueue:
@@ -58,8 +56,6 @@ Resources:
 
     lambdaFunction:
         Type: AWS::Lambda::Function
-        Metadata:
-          BuildHash: !Ref BuildHash
         Properties:
           Description: "CloudFormation Demo Lambda"
           FunctionName: !Sub youtube-demo-cloudformation${Environment}
