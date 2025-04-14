@@ -95,6 +95,6 @@ jobs:
      - name: Deploy to AWS CloudFormation
        uses: aws-actions/aws-cloudformation-github-deploy@v1
        with:
-        name: youtube-demo-cloudformation
+        name: youtube-demo-cloudformation-prod
         template: artifact/deployment.yaml
         parameter-overrides: "Environment="
