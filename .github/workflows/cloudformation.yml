@@ -76,9 +76,7 @@ jobs:
       with:
         name: youtube-demo-cloudformation
         template: artifact/deployment.yaml
-        parameter-overrides: |
-	 "Environment=-Test"
-	 BuildHash=${{ steps.vars.outputs.timestamp }}
+        parameter-overrides: Environment=-Test BuildHash=${{ steps.vars.outputs.timestamp }}
 
   prod-depoly:
     runs-on: ubuntu-latest
