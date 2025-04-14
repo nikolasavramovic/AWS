@@ -47,6 +47,8 @@ Resources:
 
     lambdaFunctionEventSourceMapping:
       Type: AWS::Lambda::EventSourceMapping
+      Metadata:
+        BuildHash: !Sub ${AWS::StackName}-${AWS::Timestamp}
       Properties:
         BatchSize: 10
         Enabled: true
